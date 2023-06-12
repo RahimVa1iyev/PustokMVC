@@ -22,9 +22,9 @@ namespace PustokMVC.Controllers
             {
                 Sliders = _context.Sliders.ToList(),
                 HomeFeatures = _context.HomeFeatures.ToList(),
-                NewBooks = _context.Books.Include(b=>b.Author).Include(b=>b.Images).Where(b=>b.IsNew==true).ToList(),
-                FeaturedBooks = _context.Books.Include(b => b.Author).Include(b => b.Images).Where(b => b.IsFetured == true).ToList(),
-                DiscountedBooks = _context.Books.Include(b => b.Author).Include(b => b.Images).Where(b => b.DiscountPercent>0).Take(5).ToList(),
+                NewBooks = _context.Books.Include(b=>b.Author).Include(b=>b.Images.Where(i=>i.ImageStatus != null)).Where(b=>b.IsNew==true).ToList(),
+                FeaturedBooks = _context.Books.Include(b => b.Author).Include(b => b.Images.Where(i=>i.ImageStatus !=null)).Where(b => b.IsFetured == true).ToList(),
+                DiscountedBooks = _context.Books.Include(b => b.Author).Include(b => b.Images.Where(i=>i.ImageStatus!=null)).Where(b => b.DiscountPercent>0).Take(5).ToList(),
                 Promotions = _context.Promotions.ToList(),
             };
 

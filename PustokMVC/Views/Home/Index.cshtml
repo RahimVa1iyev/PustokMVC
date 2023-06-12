@@ -19,15 +19,15 @@ Hero Area
         {
             var slider = Model.Sliders[i];
 
-            <div class="single-slide @(i==0? "bg-shade-whisper" : "bg-ghost-white" )  ">
+            <div class="single-slide @(i%2==0? "bg-shade-whisper" : "bg-ghost-white" )  ">
             <div class="container">
                 <div class="home-content text-center text-sm-left position-relative">
-                    <div class="hero-partial-image @(i==0?  "image-right" : "image-left")">
+                    <div class="hero-partial-image @(i%2==0?  "image-right" : "image-left")">
                         <img src="image/bg-images/@slider.Image" alt="">
                     </div>
-                    <div class="row @(i==0? "image-right" : "align-items-center justify-content-start justify-content-md-end") ">
-                        <div class="@(i==0? "col-xl-6" : "col-lg-6 col-xl-7") col-md-6 col-sm-7">
-                            <div class="home-content-inner content-@(i==0? "left" : "right")-side">
+                    <div class="row @(i%2==0? "image-right" : "align-items-center justify-content-start justify-content-md-end") ">
+                        <div class="@(i%2==0? "col-xl-6" : "col-lg-6 col-xl-7") col-md-6 col-sm-7">
+                            <div class="home-content-inner content-@(i%2==0? "left" : "right")-side">
                                 <h1>
                                     @slider.FirstTitle<br>
                                     @slider.SecondTitle
@@ -121,253 +121,14 @@ Home Slider Tab
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane show active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
-                    <div class="product-slider multiple-row  slider-border-multiple-row  sb-slick-slider"
-                         data-slick-setting='{
-                                "autoplay": true,
-                                "autoplaySpeed": 8000,
-                                "slidesToShow": 5,
-                                "rows":1,
-                                "dots":true
-                            }' data-slick-responsive='[
-                                {"breakpoint":1200, "settings": {"slidesToShow": 3} },
-                                {"breakpoint":768, "settings": {"slidesToShow": 2} },
-                                {"breakpoint":480, "settings": {"slidesToShow": 1} },
-                                {"breakpoint":320, "settings": {"slidesToShow": 1} }
-                            ]'>
-                        @foreach(var nb in Model.NewBooks)
-                        {
-                             <div class="single-slide">
-                            <div class="product-card">
-                                <div class="product-header">
-                                    <a href="#" class="author">
-                                        @nb.Author.FullName
-                                    </a>
-                                    <h3>
-                                        <a href="product-details.html">
-                                          @nb.Name
-                                        </a>
-                                    </h3>
-                                </div>
-                                <div class="product-card--body">
-                                    <div class="card-image">
-                                       @foreach (var img in nb.Images)
-                                       {
-                                              <img src="image/products/@(nb.Id==img.BookId && img.ImageStatus==true? img.ImageName : "")" alt="">   
-                                       }
-                                        <div class="hover-contents">
-                                            <a href="product-details.html" class="hover-image">
-                                               @foreach(var hoverimg in nb.Images)
-                                                    {
-                                                         <img src="image/products/@(nb.Id==hoverimg.BookId && hoverimg.ImageStatus==false? hoverimg.ImageName : "")" alt="">
-                                                    }
-                                                </a>
-                                            <div class="hover-btns">
-                                                <a href="cart.html" class="single-btn">
-                                                    <i class="fas fa-shopping-basket"></i>
-                                                </a>
-                                                <a href="wishlist.html" class="single-btn">
-                                                    <i class="fas fa-heart"></i>
-                                                </a>
-                                                <a href="compare.html" class="single-btn">
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                                <a href="#" data-toggle="modal" data-target="#quickModal"
-                                                   class="single-btn">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="price-block">
-                                        @if (nb.DiscountPercent>0)
-                                        {
-                                            <span class="price">£@((nb.SalePrice - ((nb.SalePrice * nb.DiscountPercent)/100)).ToString("0.00")) </span>
-
-                                        }
-                                        
-                                        @if (nb.DiscountPercent>0)
-                                        {
-                                                <del class="price-old">£@nb.SalePrice</del>
-                                        }
-                                        else
-                                        {
-                                               <span class="price">£@nb.SalePrice</span>
-    
-                                        }
-                                           @if (nb.DiscountPercent>0)
-                                        {
-                                             <span class="price-discount">@nb.DiscountPercent%</span>
-
-                                        }
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        }
-
-               
-                    </div>
+                <div class="tab-pane  active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
+                   @Html.Partial("_BookTabContentPartial",Model.FeaturedBooks)
                 </div>
                 <div class="tab-pane" id="men" role="tabpanel" aria-labelledby="men-tab">
-                    <div class="product-slider multiple-row  slider-border-multiple-row  sb-slick-slider"
-                         data-slick-setting='{
-                                            "autoplay": true,
-                                            "autoplaySpeed": 8000,
-                                            "slidesToShow": 5,
-                                            "rows":2,
-                                            "dots":true
-                                        }' data-slick-responsive='[
-                                            {"breakpoint":1200, "settings": {"slidesToShow": 3} },
-                                            {"breakpoint":768, "settings": {"slidesToShow": 2} },
-                                            {"breakpoint":480, "settings": {"slidesToShow": 1} },
-                                            {"breakpoint":320, "settings": {"slidesToShow": 1} }
-                                        ]'>
-                       
-                        @foreach (var fb in Model.FeaturedBooks)
-                        {
-                             <div class="single-slide">
-                            <div class="product-card">
-                                <div class="product-header">
-                                    <a href="#" class="author">
-                                        @fb.Author.FullName
-                                    </a>
-                                    <h3>
-                                        <a href="product-details.html">
-                                            @fb.Name
-                                        </a>
-                                    </h3>
-                                </div>
-                                <div class="product-card--body">
-                                    <div class="card-image">
-                                        @foreach (var pImg in fb.Images)
-                                        {
-                                             <img src="image/products/@(pImg.BookId==fb.Id && pImg.ImageStatus==true? pImg.ImageName : "")" alt="">   
-                                        }
-                                        <div class="hover-contents">
-                                            <a href="product-details.html" class="hover-image">
-
-                                                @foreach (var hImg in fb.Images)
-                                                {
-                                                   <img src="image/products/@(hImg.BookId==fb.Id && hImg.ImageStatus==false? hImg.ImageName : "")" alt="">   
-                                                }
-                                            </a>
-                                            <div class="hover-btns">
-                                                <a href="cart.html" class="single-btn">
-                                                    <i class="fas fa-shopping-basket"></i>
-                                                </a>
-                                                <a href="wishlist.html" class="single-btn">
-                                                    <i class="fas fa-heart"></i>
-                                                </a>
-                                                <a href="compare.html" class="single-btn">
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                                <a href="#" data-toggle="modal" data-target="#quickModal"
-                                                   class="single-btn">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="price-block">
-                                          @if (fb.DiscountPercent>0)
-                                        {
-                                            <span class="price">£@((fb.SalePrice - ((fb.SalePrice * fb.DiscountPercent)/100)).ToString("0.00")) </span>
-
-                                        }
-                                        
-                                        @if (fb.DiscountPercent>0)
-                                        {
-                                                <del class="price-old">£@fb.SalePrice</del>
-                                        }
-                                        else
-                                        {
-                                               <span class="price">£@fb.SalePrice</span>
-    
-                                        }
-                                           @if (fb.DiscountPercent>0)
-                                        {
-                                             <span class="price-discount">@fb.DiscountPercent%</span>
-
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        }
-                    
-                    </div>
+                   @Html.Partial("_BookTabContentPartial",Model.NewBooks)
                 </div>
                 <div class="tab-pane" id="woman" role="tabpanel" aria-labelledby="woman-tab">
-                    <div class="product-slider multiple-row  slider-border-multiple-row  sb-slick-slider"
-                         data-slick-setting='{
-                                            "autoplay": true,
-                                            "autoplaySpeed": 8000,
-                                            "slidesToShow": 5,
-                                            "rows":1,
-                                            "dots":true
-                                        }' data-slick-responsive='[
-                                            {"breakpoint":1200, "settings": {"slidesToShow": 3} },
-                                            {"breakpoint":768, "settings": {"slidesToShow": 2} },
-                                            {"breakpoint":480, "settings": {"slidesToShow": 1} },
-                                            {"breakpoint":320, "settings": {"slidesToShow": 1} }
-                                        ]'>
-                       @foreach (var db in Model.DiscountedBooks)
-                        {
-                             <div class="single-slide">
-                            <div class="product-card">
-                                <div class="product-header">
-                                    <a href="#" class="author">
-                                        @db.Author.FullName
-                                    </a>
-                                    <h3>
-                                        <a href="product-details.html">
-                                            @db.Name
-                                        </a>
-                                    </h3>
-                                </div>
-                                <div class="product-card--body">
-                                    <div class="card-image">
-                                            @foreach(var pImg in db.Images)
-                                            {
-                                                <img src="image/products/@(db.Id == pImg.BookId && pImg.ImageStatus==true? @pImg.ImageName : "")" alt="">
-                                            }
-                                            <div class="hover-contents">
-                                            <a href="product-details.html" class="hover-image">
-                                            @foreach(var hImg in db.Images)
-                                            {
-                                                <img src="image/products/@(db.Id == hImg.BookId && hImg.ImageStatus==false? @hImg.ImageName : "")" alt="">
-                                            }
-                                            </a>
-                                            <div class="hover-btns">
-                                                <a href="cart.html" class="single-btn">
-                                                    <i class="fas fa-shopping-basket"></i>
-                                                </a>
-                                                <a href="wishlist.html" class="single-btn">
-                                                    <i class="fas fa-heart"></i>
-                                                </a>
-                                                <a href="compare.html" class="single-btn">
-                                                    <i class="fas fa-random"></i>
-                                                </a>
-                                                <a href="#" data-toggle="modal" data-target="#quickModal"
-                                                   class="single-btn">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="price-block">
-                                        <span class="price">@((db.SalePrice - ((db.SalePrice * db.DiscountPercent)/100)).ToString("0.00"))</span>
-                                        <del class="price-old">£@db.SalePrice</del>
-                                        <span class="price-discount">@db.DiscountPercent%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        }
-                      
-                    </div>
+                    @Html.Partial("_BookTabContentPartial",Model.DiscountedBooks)
                 </div>
             </div>
         </div>
