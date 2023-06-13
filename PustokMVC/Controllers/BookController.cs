@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PustokMVC.DAL;
 using PustokMVC.Models;
+using PustokMVC.ModelView;
 
 namespace PustokMVC.Controllers
 {
@@ -24,6 +26,51 @@ namespace PustokMVC.Controllers
                             .Include(b => b.Images.Where(i => i.ImageStatus == true))
                             .FirstOrDefault(x => x.Id == id);
             return PartialView("_ModalPartial",book);
+        }
+
+        public IActionResult SetProducts(int id)
+        {
+            var basketItem = HttpContext.Request.Cookies["basket"];
+
+            List<BasketCookieItemVM> items = null;
+
+            if (basketItem != null)
+            {
+                items = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(basketItem);
+            }
+            else
+            {
+                items = new List<BasketCookieItemVM>();
+            }
+
+            BasketCookieItemVM item = items.FirstOrDefault(x => x.BookId == id);
+
+            if (item == null)
+            {
+                item = new()
+                {
+                    BookId = id,
+                    Count = 1
+                };
+
+                items.Add(item);
+            }
+            else
+                item.Count++;
+          
+
+
+            HttpContext.Response.Cookies.Append("basket", JsonConvert.SerializeObject(items));
+
+            return RedirectToAction("index","home");
+
+        }
+
+        public IActionResult GetProducts()
+        {
+            var dataStr = HttpContext.Request.Cookies["basket"];
+            var data = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(dataStr);
+            return Json(data);
         }
     }
 }
