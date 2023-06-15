@@ -19,31 +19,31 @@ Hero Area
         {
             var slider = Model.Sliders[i];
 
-            <div class="single-slide @(i%2==0? "bg-shade-whisper" : "bg-ghost-white" )  ">
-            <div class="container">
-                <div class="home-content text-center text-sm-left position-relative">
-                    <div class="hero-partial-image @(i%2==0?  "image-right" : "image-left")">
-                        <img src="image/bg-images/@slider.Image" alt="">
-                    </div>
-                    <div class="row @(i%2==0? "image-right" : "align-items-center justify-content-start justify-content-md-end") ">
-                        <div class="@(i%2==0? "col-xl-6" : "col-lg-6 col-xl-7") col-md-6 col-sm-7">
-                            <div class="home-content-inner content-@(i%2==0? "left" : "right")-side">
-                                <h1>
-                                    @slider.FirstTitle<br>
-                                    @slider.SecondTitle
-                                </h1>
-                                <h2>@slider.Description</h2>
-                                <a href="@slider.ButtonUrl" class="btn btn-outlined--primary">
-                                    @slider.ButtonText
-                                </a>
+            <div  class="single-slide @(i%2==0? "bg-shade-whisper" : "bg-ghost-white" )  ">
+                <div class="container">
+                    <div class="home-content text-center text-sm-left position-relative">
+                        <div class="hero-partial-image @(i%2==0?  "image-right" : "image-left")">
+                            <img src="~/image/bg-images/@slider.Image" alt="">
+                        </div>
+                        <div class="row @(i%2==0? "image-right" : "align-items-center justify-content-start justify-content-md-end") ">
+                            <div class="@(i%2==0? "col-xl-6" : "col-lg-6 col-xl-7") col-md-6 col-sm-7">
+                                <div class="home-content-inner content-@(i%2==0? "left" : "right")-side">
+                                    <h1>
+                                        @slider.FirstTitle<br>
+                                        @slider.SecondTitle
+                                    </h1>
+                                    <h2>@slider.Description</h2>
+                                    <a href="@slider.ButtonUrl" class="btn btn-outlined--primary">
+                                        @slider.ButtonText
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         }
-       </div>
+    </div>
 </section>
 <!--=================================
 Home Features Section
@@ -82,7 +82,7 @@ Promotion Section One
             {
                    <div class="col-lg-6 col-md-6 mb--30">
                 <a href="#" class="promo-image promo-overlay">
-                    <img src="image/bg-images/@promo.Image" alt="">
+                    <img src="~/image/bg-images/@promo.Image" alt="">
                 </a>
             </div>
             }
@@ -168,10 +168,10 @@ Deal of the day
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-2.jpg" alt="">
+                            <img src="~/image/products/product-2.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-1.jpg" alt="">
+                                    <img src="~/image/products/product-1.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -211,10 +211,10 @@ Deal of the day
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-1.jpg" alt="">
+                            <img src="~/image/products/product-1.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-1.jpg" alt="">
+                                    <img src="~/image/products/product-1.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -254,10 +254,10 @@ Deal of the day
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-3.jpg" alt="">
+                            <img src="~/image/products/product-3.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-2.jpg" alt="">
+                                    <img src="~/image/products/product-2.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -299,10 +299,10 @@ Deal of the day
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-5.jpg" alt="">
+                            <img src="~/image/products/product-5.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-4.jpg" alt="">
+                                    <img src="~/image/products/product-4.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -342,10 +342,10 @@ Deal of the day
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-6.jpg" alt="">
+                            <img src="~/image/products/product-6.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-4.jpg" alt="">
+                                    <img src="~/image/products/product-4.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -387,10 +387,10 @@ Deal of the day
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-8.jpg" alt="">
+                            <img src="~/image/products/product-8.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-7.jpg" alt="">
+                                    <img src="~/image/products/product-7.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -434,10 +434,10 @@ Deal of the day
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-13.jpg" alt="">
+                            <img src="~/image/products/product-13.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-11.jpg" alt="">
+                                    <img src="~/image/products/product-11.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -483,7 +483,7 @@ Best Seller Product
             <div class="row align-items-center">
                 <div class="col-lg-5 col-md-6">
                     <div class="author-image">
-                        <img src="image/others/best-seller-author.jpg" alt="">
+                        <img src="~/image/others/best-seller-author.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-6">
@@ -504,7 +504,7 @@ Best Seller Product
                         <div class="single-slide">
                             <div class="product-card card-style-list">
                                 <div class="card-image">
-                                    <img src="image/products/product-6.jpg" alt="">
+                                    <img src="~/image/products/product-6.jpg" alt="">
                                 </div>
                                 <div class="product-card--body">
                                     <div class="product-header">
@@ -529,7 +529,7 @@ Best Seller Product
                         <div class="single-slide">
                             <div class="product-card card-style-list">
                                 <div class="card-image">
-                                    <img src="image/products/product-1.jpg" alt="">
+                                    <img src="~/image/products/product-1.jpg" alt="">
                                 </div>
                                 <div class="product-card--body">
                                     <div class="product-header">
@@ -555,7 +555,7 @@ Best Seller Product
                         <div class="single-slide">
                             <div class="product-card card-style-list">
                                 <div class="card-image">
-                                    <img src="image/products/product-2.jpg" alt="">
+                                    <img src="~/image/products/product-2.jpg" alt="">
                                 </div>
                                 <div class="product-card--body">
                                     <div class="product-header">
@@ -581,7 +581,7 @@ Best Seller Product
                         <div class="single-slide">
                             <div class="product-card card-style-list">
                                 <div class="card-image">
-                                    <img src="image/products/product-3.jpg" alt="">
+                                    <img src="~/image/products/product-3.jpg" alt="">
                                 </div>
                                 <div class="product-card--body">
                                     <div class="product-header">
@@ -609,7 +609,7 @@ Best Seller Product
                         <div class="single-slide">
                             <div class="product-card card-style-list">
                                 <div class="card-image">
-                                    <img src="image/products/product-5.jpg" alt="">
+                                    <img src="~/image/products/product-5.jpg" alt="">
                                 </div>
                                 <div class="product-card--body">
                                     <div class="product-header">
@@ -634,7 +634,7 @@ Best Seller Product
                         <div class="single-slide">
                             <div class="product-card card-style-list">
                                 <div class="card-image">
-                                    <img src="image/products/product-4.jpg" alt="">
+                                    <img src="~/image/products/product-4.jpg" alt="">
                                 </div>
                                 <div class="product-card--body">
                                     <div class="product-header">
@@ -688,7 +688,7 @@ CHILDREN’S BOOKS
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="image/products/product-2.jpg" alt="">
+                        <img src="~/image/products/product-2.jpg" alt="">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
@@ -708,7 +708,7 @@ CHILDREN’S BOOKS
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="image/products/product-1.jpg" alt="">
+                        <img src="~/image/products/product-1.jpg" alt="">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
@@ -730,7 +730,7 @@ CHILDREN’S BOOKS
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="image/products/product-3.jpg" alt="">
+                        <img src="~/image/products/product-3.jpg" alt="">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
@@ -750,7 +750,7 @@ CHILDREN’S BOOKS
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="image/products/product-4.jpg" alt="">
+                        <img src="~/image/products/product-4.jpg" alt="">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
@@ -772,7 +772,7 @@ CHILDREN’S BOOKS
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="image/products/product-5.jpg" alt="">
+                        <img src="~/image/products/product-5.jpg" alt="">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
@@ -794,7 +794,7 @@ CHILDREN’S BOOKS
             <div class="single-slide">
                 <div class="product-card card-style-list">
                     <div class="card-image">
-                        <img src="image/products/product-6.jpg" alt="">
+                        <img src="~/image/products/product-6.jpg" alt="">
                     </div>
                     <div class="product-card--body">
                         <div class="product-header">
@@ -824,7 +824,7 @@ Promotion Section Two
                 <div class="promo-wrapper promo-type-one">
                     <a href="#" class="promo-image  promo-overlay bg-image"
                        data-bg="image/bg-images/promo-banner-mid.jpg">
-                        <!-- <img src="image/bg-images/promo-banner-mid.jpg" alt=""> -->
+                        <!-- <img src="~/image/bg-images/promo-banner-mid.jpg" alt=""> -->
                     </a>
                     <div class="promo-text">
                         <div class="promo-text-inner">
@@ -839,7 +839,7 @@ Promotion Section Two
                 <div class="promo-wrapper promo-type-two ">
                     <a href="#" class="promo-image promo-overlay bg-image"
                        data-bg="image/bg-images/promo-banner-small.jpg">
-                        <!-- <img src="image/bg-images/promo-banner-small.jpg" alt=""> -->
+                        <!-- <img src="~/image/bg-images/promo-banner-small.jpg" alt=""> -->
                     </a>
                     <div class="promo-text">
                         <div class="promo-text-inner">
@@ -890,10 +890,10 @@ ARTS & PHOTOGRAPHY BOOKS
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-2.jpg" alt="">
+                            <img src="~/image/products/product-2.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-1.jpg" alt="">
+                                    <img src="~/image/products/product-1.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -932,10 +932,10 @@ ARTS & PHOTOGRAPHY BOOKS
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-2.jpg" alt="">
+                            <img src="~/image/products/product-2.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-1.jpg" alt="">
+                                    <img src="~/image/products/product-1.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -972,10 +972,10 @@ ARTS & PHOTOGRAPHY BOOKS
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-3.jpg" alt="">
+                            <img src="~/image/products/product-3.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-2.jpg" alt="">
+                                    <img src="~/image/products/product-2.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -1014,10 +1014,10 @@ ARTS & PHOTOGRAPHY BOOKS
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-5.jpg" alt="">
+                            <img src="~/image/products/product-5.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-4.jpg" alt="">
+                                    <img src="~/image/products/product-4.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -1054,10 +1054,10 @@ ARTS & PHOTOGRAPHY BOOKS
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-6.jpg" alt="">
+                            <img src="~/image/products/product-6.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-4.jpg" alt="">
+                                    <img src="~/image/products/product-4.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -1094,10 +1094,10 @@ ARTS & PHOTOGRAPHY BOOKS
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-8.jpg" alt="">
+                            <img src="~/image/products/product-8.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-7.jpg" alt="">
+                                    <img src="~/image/products/product-7.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -1138,10 +1138,10 @@ ARTS & PHOTOGRAPHY BOOKS
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="image/products/product-13.jpg" alt="">
+                            <img src="~/image/products/product-13.jpg" alt="">
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="image/products/product-11.jpg" alt="">
+                                    <img src="~/image/products/product-11.jpg" alt="">
                                 </a>
                                 <div class="hover-btns">
                                     <a href="cart.html" class="single-btn">
@@ -1216,7 +1216,7 @@ Home Blog
             <div class="single-slide">
                 <div class="blog-card">
                     <div class="image">
-                        <img src="image/others/blog-grid-1.jpg" alt="">
+                        <img src="~/image/others/blog-grid-1.jpg" alt="">
                     </div>
                     <div class="content">
                         <div class="content-header">
@@ -1249,7 +1249,7 @@ Home Blog
             <div class="single-slide">
                 <div class="blog-card">
                     <div class="image">
-                        <img src="image/others/blog-grid-2.jpg" alt="">
+                        <img src="~/image/others/blog-grid-2.jpg" alt="">
                     </div>
                     <div class="content">
                         <div class="content-header">
@@ -1282,7 +1282,7 @@ Home Blog
             <div class="single-slide">
                 <div class="blog-card">
                     <div class="image">
-                        <img src="image/others/blog-grid-3.jpg" alt="">
+                        <img src="~/image/others/blog-grid-3.jpg" alt="">
                     </div>
                     <div class="content">
                         <div class="content-header">
@@ -1315,3 +1315,11 @@ Home Blog
         </div>
     </div>
 </section>
+
+  <div class="modal fade modal-quick-view" id="quickModal" tabindex="-1" role="dialog"  aria-labelledby="quickModal" aria-hidden="true">
+
+      <div class="modal-dialog" role="document">
+                
+      </div>
+
+  </div>

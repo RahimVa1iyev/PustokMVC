@@ -8,9 +8,9 @@ namespace PustokMVC.Services
     public class LayoutService
     {
         private readonly PustokDbContext _context;
-        private readonly HttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public LayoutService(PustokDbContext context , HttpContextAccessor httpContextAccessor)
+        public LayoutService(PustokDbContext context , IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;

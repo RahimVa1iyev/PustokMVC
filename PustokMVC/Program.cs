@@ -11,6 +11,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<LayoutService>();
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

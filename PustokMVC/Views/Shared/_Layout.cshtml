@@ -3,11 +3,11 @@
 
 @{
     var basket = _layoutService.GetBasket();
-};
+}
+
+
 <!DOCTYPE html>
 <html lang="zxx">
-
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -331,8 +331,8 @@
                                         <a href="login-register.html" class="font-weight-bold">Login</a> <br>
                                         <span>or</span><a href="login-register.html">Register</a>
                                     </div>
-                                    <div class="cart-block">
-                                      @Html.Partial("_BasketPartial", basket)
+                                    <div  class="cart-block">
+                                     @Html.Partial("_BasketPartial", basket)
                                     </div>
                                 </div>
                             </div>
@@ -817,12 +817,7 @@
         Footer
         ===================================== -->
         <!-- Modal -->
-        <div class="modal fade modal-quick-view" id="quickModal" tabindex="-1" role="dialog"
-             aria-labelledby="quickModal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            </div>
-        </div>
-    </div>
+     
     <!--=================================
     Brands Slider
     ===================================== -->

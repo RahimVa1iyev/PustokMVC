@@ -18,7 +18,7 @@ namespace PustokMVC.Controllers
 
         public IActionResult Detail(int id)
         {
-            Book? book = _context.Books
+            Book book = _context.Books
                             .Include(b => b.Author)
                             .Include(b => b.Genre)
                             .Include(b => b.BookTags)
@@ -62,15 +62,51 @@ namespace PustokMVC.Controllers
 
             HttpContext.Response.Cookies.Append("basket", JsonConvert.SerializeObject(items));
 
+            BasketVM basketVM = new BasketVM();
+
+            foreach (var cookieItem in items)
+            {
+                BasketItemVM basketItemVM = new()
+                {
+                    Book = _context.Books.Include(x => x.Images.Where(x => x.ImageStatus == true)).FirstOrDefault(x => x.Id == id),
+                    Count = cookieItem.Count,
+                };
+
+                basketVM.BasketItemVMs.Add(basketItemVM);
+                basketVM.TotalAmount += cookieItem.Count * (basketItemVM.Book.DiscountPercent > 0 ? (basketItemVM.Book.SalePrice * ((100 - basketItemVM.Book.DiscountPercent) / 100)) : basketItemVM.Book.SalePrice);
+
+            }
+
+
             return RedirectToAction("index","home");
 
         }
 
-        public IActionResult GetProducts()
+        public IActionResult DeleteProducts(int id)
         {
-            var dataStr = HttpContext.Request.Cookies["basket"];
-            var data = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(dataStr);
-            return Json(data);
+            var basketStr = HttpContext.Request.Cookies["basket"];
+
+            List<BasketCookieItemVM> cookieItems = null;
+
+            if (basketStr != null)
+                cookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemVM>>(basketStr);
+            else
+            {
+                cookieItems = new List<BasketCookieItemVM>();
+            }
+
+            var existProduct = cookieItems.FirstOrDefault(x => x.BookId == id);
+
+            if (existProduct != null)
+            {
+                cookieItems.Remove(existProduct);
+            }
+            
+            HttpContext.Response.Cookies.Append("basket",JsonConvert.SerializeObject(cookieItems));
+
+
+
+            return RedirectToAction("index","home");
         }
     }
 }
