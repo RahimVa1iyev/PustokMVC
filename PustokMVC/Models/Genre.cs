@@ -6,7 +6,8 @@ namespace PustokMVC.Models
     {
         public int Id { get; set; }
 
-        [StringLength(30)]
+        [MaxLength(30)]
+
         public string Name { get; set; }
 
         public ICollection<Book> Books { get; set; }

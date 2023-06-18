@@ -1,0 +1,25 @@
+﻿@using PustokMVC.Models
+
+@model Genre
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+
+
+
+<div class="container">
+    <div col-md-5>
+        <form method="post" asp-action="edit" >
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
