@@ -60,6 +60,10 @@ namespace PustokMVC.Areas.Manage.Controllers
         [HttpPost]
         public IActionResult Edit(Genre genre)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
            
 
             if (_context.Genres.Any(x => x.Name == genre.Name))
@@ -77,7 +81,7 @@ namespace PustokMVC.Areas.Manage.Controllers
             _context.SaveChanges();
 
 
-            return View("index","genre");
+            return View("index");
         }
     }
 }

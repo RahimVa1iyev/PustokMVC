@@ -12,7 +12,7 @@
         <div class="col-md-8">
             <div class="d-flex align-items-center justify-content-between ">
                 <h1 >Authors</h1>  
-                <a class="btn btn-success " > Create</a>
+                <a class="btn btn-success " asp-action="create" > Create</a>
             </div>
         </div>
         <div class="col-md-8">
@@ -35,7 +35,7 @@
                             <td>@item.FullName</td>
                             <td>@item.Books.Count</td>
                             <td>   
-                                <a class="btn btn-warning">Edit </a>
+                                <a asp-action="edit" asp-controller="author" asp-route-id="@item.Id" class="btn btn-warning">Edit </a>
                                 <a class="btn btn-danger">Delete</a>
 
                             </td>
