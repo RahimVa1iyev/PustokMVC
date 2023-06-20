@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PustokMVC.Areas.Manage.ViewModels;
 using PustokMVC.DAL;
 using PustokMVC.Models;
 
@@ -14,11 +15,16 @@ namespace PustokMVC.Areas.Manage.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page=1, string search =null)
         {
-            List<Author> authors = _context.Authors.Include(x=>x.Books).ToList();
 
-            return View(authors);
+
+            var query = _context.Authors.Include(x=>x.Books).AsQueryable();
+
+            if(search!=null) query = query.Where(x=>x.FullName.Contains(search));
+           
+
+            return View(PaginatedList<Author>.Create(query,page,2));
         }
 
         public IActionResult Create()
@@ -41,7 +47,9 @@ namespace PustokMVC.Areas.Manage.Controllers
         public IActionResult Edit(int id)
         {
 
-            Author author = _context.Authors.FirstOrDefault(x =>x.Id == id);
+            Author author = _context.Authors.Find(id);
+
+            if (author == null) return View("error");
 
             return View(author);
 
@@ -55,12 +63,10 @@ namespace PustokMVC.Areas.Manage.Controllers
                 return View();
             }
 
-            if (_context.Authors.FirstOrDefault(x=>x.FullName==author.FullName)!=null)
-            {
-                return View();
-            }
+            var existAuthor = _context.Authors.Find(author.Id);
 
-            var existAuthor = _context.Authors.FirstOrDefault(x => x.Id == author.Id);
+            if (existAuthor == null) return View("error");
+
             existAuthor.FullName=author.FullName;
 
             _context.SaveChanges();

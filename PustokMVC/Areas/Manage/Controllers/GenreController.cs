@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PustokMVC.Areas.Manage.ViewModels;
 using PustokMVC.DAL;
 using PustokMVC.Models;
 
@@ -15,10 +16,17 @@ namespace PustokMVC.Areas.Manage.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page=1,string search = null)
         {
-            List<Genre> genres = _context.Genres.Include(x=>x.Books).ToList();
-            return View(genres);
+            ViewBag.Search = search;
+            var query = _context.Genres.Include(x=>x.Books).AsQueryable();
+
+            if (search !=null)
+            {
+               query= query.Where(x => x.Name.Contains(search));
+            }
+            return View(PaginatedList<Genre>.Create(query,page,2));
+
         }
         public IActionResult Create()
         {
@@ -81,7 +89,7 @@ namespace PustokMVC.Areas.Manage.Controllers
             _context.SaveChanges();
 
 
-            return View("index");
+            return RedirectToAction("index");
         }
     }
 }

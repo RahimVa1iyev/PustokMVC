@@ -1,18 +1,32 @@
-﻿
-
+﻿@using PustokMVC.Areas.Manage.ViewModels
 @using PustokMVC.Models
 
-@model List<Author>
+@model PaginatedList<Author>
 @{
-    var count = 0;
+    var count = (Model.PageIndex-1)*2;
 }
 
 <div class="container">
     <div class="row justify-content-center">
+         <div class="col-md-8">
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input name="search" value="@ViewBag.Search" type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
         <div class="col-md-8">
             <div class="d-flex align-items-center justify-content-between ">
-                <h1 >Authors</h1>  
-                <a class="btn btn-success " asp-action="create" > Create</a>
+                <h1>Authors</h1>
+                <a class="btn btn-success " asp-action="create"> Create</a>
             </div>
         </div>
         <div class="col-md-8">
@@ -27,14 +41,14 @@
                 </thead>
                 <tbody>
 
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Items)
                     {
                         count++;
                         <tr>
                             <th scope="row">@count</th>
                             <td>@item.FullName</td>
                             <td>@item.Books.Count</td>
-                            <td>   
+                            <td>
                                 <a asp-action="edit" asp-controller="author" asp-route-id="@item.Id" class="btn btn-warning">Edit </a>
                                 <a class="btn btn-danger">Delete</a>
 
@@ -44,6 +58,24 @@
 
                 </tbody>
             </table>
+
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item @(Model.HasPrevious?"" : "disabled")">
+                        <a class="page-link" asp-route-page="@(Model.PageIndex-1)" >Previous</a>
+                    </li>
+
+                  
+                    @for (int i = 1; i <= Model.TotalPage; i++)
+                    {
+                      <li class="page-item @(i==Model.PageIndex?"active" : "" ) "><a class="page-link" asp-route-search="@ViewBag.Search" asp-route-page="@i">@i</a></li>
+
+                    }
+                    <li class="page-item @(Model.HasNext?"" : "disabled") ">
+                        <a class="page-link" asp-route-page="@(Model.PageIndex+1)">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
