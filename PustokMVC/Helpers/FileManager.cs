@@ -1,21 +1,19 @@
 ﻿namespace PustokMVC.Helpers
 {
-    public static class FileManager
+    public class FileManager
     {
-        public static string Save(IFormFile file , string rootpath,string folder)
+        public static string Save(IFormFile file, string rootPath,string folder)
         {
 
-            var newFormFile = Guid.NewGuid().ToString() + (file.FileName.Length <= 64 ? file.FileName : file.FileName.Substring(file.FileName.Length - 64));
-
-            var path = Path.Combine(rootpath, folder, newFormFile);
+            var newFileName = Guid.NewGuid().ToString() + (file.FileName.Length <= 64 ? file.FileName : file.FileName.Substring(file.FileName.Length - 64));
+            var path = rootPath  + folder + newFileName;
 
             using (var stream = new FileStream(path, FileMode.Create))
             {
                 file.CopyTo(stream);
             }
 
-            return newFormFile;
-
+            return newFileName;
         }
     }
 }

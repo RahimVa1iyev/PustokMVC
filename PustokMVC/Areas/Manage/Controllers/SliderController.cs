@@ -1,25 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PustokMVC.Areas.Manage.ViewModels;
 using PustokMVC.DAL;
 using PustokMVC.Helpers;
 using PustokMVC.Models;
 
 namespace PustokMVC.Areas.Manage.Controllers
 {
-    [Area("Manage")]
+    [Area("manage")]
     public class SliderController : Controller
     {
         private readonly PustokDbContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public SliderController(PustokDbContext context,IWebHostEnvironment env)
+        public SliderController(PustokDbContext context ,IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            List<Slider> sliders = _context.Sliders.ToList();
-            return View(sliders);
+
+            var query = _context.Sliders.AsQueryable();
+
+            return View(PaginatedList<Slider>.Create(query,page,3));
         }
 
         public IActionResult Create()
@@ -31,38 +34,28 @@ namespace PustokMVC.Areas.Manage.Controllers
         [HttpPost]
         public IActionResult Create(Slider slider)
         {
-            if(!ModelState.IsValid ) return View();
 
-            if (slider.FormFile==null)
+            if (!ModelState.IsValid) return View();
+
+            if (slider.FileImage.Length > 2*1024*1024)
             {
-                ModelState.AddModelError("FormFile", "File is required");
+                ModelState.AddModelError("FileImage", "File max size 2 mb");
                 return View();
             }
 
-            if (slider.FormFile.Length > 2* 1024 * 1024)
+            if (slider.FileImage.ContentType!="image/jpeg" && slider.FileImage.ContentType!="image/png")
             {
-                ModelState.AddModelError("FormFile" ,"File max size must be 2mb");
-                return View();
-            }
-
-            if (slider.FormFile.ContentType!="image/jpeg" && slider.FormFile.ContentType!="image/png")
-            {
-                ModelState.AddModelError("FormFile", "File must be .jpeg, .jpg or .png ");
+                ModelState.AddModelError("FileImage", "File must be .jpeg, .jpg or .png");
                 return View();
             }
 
 
-            
+            slider.Image = FileManager.Save(slider.FileImage, _env.WebRootPath, "~/manage/uploads/sliders");
 
-            slider.Image = FileManager.Save(slider.FormFile, _env.WebRootPath, "image/bg-images"); 
 
             _context.Sliders.Add(slider);
 
-            _context.SaveChanges();
-
             return RedirectToAction("index");
-
-
         }
     }
 }

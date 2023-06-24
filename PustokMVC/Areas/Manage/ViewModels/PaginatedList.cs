@@ -2,30 +2,32 @@
 {
     public class PaginatedList<T>
     {
-        public PaginatedList(List<T> query, int page, int totalpage)
+
+        public PaginatedList(List<T> items,int page, int totalPage)
         {
-            Items = query;
+            Items = items;
             PageIndex = page;
-            TotalPage = totalpage;
+            TotalPages = totalPage;
         }
 
         public List<T> Items { get; set; }
 
         public int PageIndex { get; set; }
 
-        public int TotalPage { get; set; }
+        public int TotalPages { get; set; }
 
-        public bool HasPrevious => PageIndex > 1;
+        public bool HasPrev  =>  PageIndex > 1;
 
-        public bool HasNext => PageIndex < TotalPage;
+        public bool HasNext => PageIndex < TotalPages;
 
-        public static PaginatedList<T> Create(IQueryable<T> query,int pageIndex,int pageSize)
+      
+
+        public static PaginatedList<T> Create(IQueryable<T> query, int pageIndex,int pagesize)
         {
-            var items = query.Skip((pageIndex-1) * 2 ).Take(pageSize).ToList();
+            var Items = query.Skip((pageIndex - 1) * pagesize).Take(pagesize).ToList();
+            var TotalPages = (int)Math.Ceiling((query.Count() / (double)pagesize));
 
-            var totalPage = (int)Math.Ceiling(query.Count()/(decimal)pageSize);
-
-            return new PaginatedList<T>(items, pageIndex, totalPage);
+            return new PaginatedList<T>(Items,pageIndex, TotalPages);
 
         }
     }

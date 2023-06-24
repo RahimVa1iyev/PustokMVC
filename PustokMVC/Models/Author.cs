@@ -8,8 +8,9 @@ namespace PustokMVC.Models
         public int Id { get; set; }
 
         [StringLength(40)]
+        [Required]
         public string FullName { get; set; }
 
-        public ICollection<Book> Books { get; set; }
+        public List<Book> Books { get; set; }
     }
 }

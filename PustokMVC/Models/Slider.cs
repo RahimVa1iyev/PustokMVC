@@ -20,6 +20,7 @@ namespace PustokMVC.Models
         public string Image { get; set; }
 
         [NotMapped]
-        public IFormFile FormFile { get; set; }
+
+        public IFormFile FileImage { get; set; }
     }
 }

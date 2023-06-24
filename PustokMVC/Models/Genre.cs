@@ -7,6 +7,7 @@ namespace PustokMVC.Models
         public int Id { get; set; }
 
         [MaxLength(30)]
+        [Required]
         public string Name { get; set; }
 
         public List<Book> Books { get; set; }

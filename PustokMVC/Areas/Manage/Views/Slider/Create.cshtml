@@ -1,52 +1,55 @@
-﻿@using PustokMVC.Models
+﻿
+
+@using PustokMVC.Models
 @model Slider
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-8">
-            <form method="post" asp-action="create" enctype="multipart/form-data" >
+            <h1> Slider Create>
+        </div>
+        <div class="col-md-8">
+            <form method="post" asp-action="create" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="FirstTitle">FirstTitle</label>
-                    <input asp-for="FirstTitle" class="form-control"  placeholder="FirstTitle">
-                    <span asp-validation-for="FirstTitle" ></span>
+                    <input asp-for="FirstTitle" class="form-control"  >
+                    <span asp-validation-for="FirstTitle"></span>
                 </div>
-                <div class="form-group">
+                 <div class="form-group">
                     <label asp-for="SecondTitle">SecondTitle</label>
-                    <input asp-for="SecondTitle" class="form-control"  placeholder="SecondTitle">
-                    <span asp-validation-for="SecondTitle" ></span>
+                    <input asp-for="SecondTitle" class="form-control"  >
+                    <span asp-validation-for="SecondTitle"></span>
                 </div>
-
-                <div class="form-group">
-                    <label asp-for="ButtonUrl">ButtonUrl</label>
-                    <input asp-for="ButtonUrl" class="form-control"  placeholder="ButtonUrl">
-                    <span asp-validation-for="ButtonUrl" ></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="ButtonText">ButtonText</label>
-                    <input asp-for="ButtonText" class="form-control"  placeholder="ButtonText">
-                    <span asp-validation-for="ButtonText" ></span>
-                </div>
-
                  <div class="form-group">
                     <label asp-for="Description">Description</label>
-                    <input asp-for="Description" class="form-control"  placeholder="Description">
-                    <span asp-validation-for="Description" ></span>
+                    <input asp-for="Description" class="form-control"  >
+                    <span asp-validation-for="Description"></span>
                 </div>
-
-
-                <div class="form-group">
-                    <label asp-for="FormFile">File</label>
-                    <input asp-for="FormFile" class="form-control"  placeholder="File">
-                    <span asp-validation-for="FormFile" ></span>
+                 <div class="form-group">
+                    <label asp-for="ButtonText">ButtonText</label>
+                    <input asp-for="ButtonText" class="form-control"  >
+                    <span asp-validation-for="ButtonText"></span>
                 </div>
+                 <div class="form-group">
+                    <label asp-for="ButtonUrl">ButtonUrl</label>
+                    <input asp-for="ButtonUrl" class="form-control"  >
+                    <span asp-validation-for="ButtonUrl"></span>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="FileImage">File</label>
+                    <input asp-for="FileImage" class="form-control" >
+                    <span asp-validation-for="FileImage"></span>
+                   
+                </div>
+              
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+
     </div>
 </div>

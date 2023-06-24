@@ -2,8 +2,8 @@
 
 namespace PustokMVC.Areas.Manage.Controllers
 {
-    [Area("Manage")]
-    public class DashboardController : Controller
+    [Area("manage")]
+    public class DashBoardController : Controller
     {
         public IActionResult Index()
         {

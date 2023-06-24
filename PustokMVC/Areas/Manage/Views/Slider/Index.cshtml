@@ -1,18 +1,22 @@
-﻿
-
+﻿@using PustokMVC.Areas.Manage.ViewModels
 @using PustokMVC.Models
 
-@model List<Slider>
+@model PaginatedList<Slider>
+
 @{
-    var count = 0;
+    ViewData["Title"] = "Index";
+    var dataOrder = (Model.PageIndex-1)* Model.TotalPages;
 }
+
+
+
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="d-flex align-items-center justify-content-between ">
-                <h1 >Sliders</h1>  
-                <a class="btn btn-success " asp-action="create" > Create</a>
+            <div class="d-flex align-items-center justify-content-between">
+                <h1>Genres</h1>
+                <a  asp-action="create" class="btn btn-success" >Create</a>
             </div>
         </div>
         <div class="col-md-8">
@@ -20,30 +24,29 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">FTitle</th>
-                        <th scope="col">STitle</th>
+                        <th scope="col">FirstTitle</th>
+                        <th scope="col">SecondTitle</th>
                         <th scope="col">ButtonText</th>
-
                         <th scope="col">Image</th>
 
                     </tr>
                 </thead>
                 <tbody>
-
-                    @foreach (var item in Model)
+                    @foreach (var slider in Model.Items)
                     {
-                        count++;
+                        dataOrder++;
+
                         <tr>
-                            <th scope="row">@count</th>
-                            <td>@item.FirstTitle</td>
-                            <td>@item.SecondTitle</td>
-                            <td>@item.ButtonText</td>
+                            <th scope="row">@dataOrder</th>
+                            <td>@slider.FirstTitle</td>
+                            <td>@slider.SecondTitle</td>
+                            <td>@slider.ButtonText</td>
+                            <td>
+                                <img width="150" src="~/manage/uploads/sliders/@slider.Image" />
+                            </td>
 
-
-                            <td><img width="150" src="~/image/bg-images/@item.Image" /></td>
-
-                            <td>   
-                                <a class="btn btn-warning">Edit </a>
+                            <td>
+                                <a asp-action="edit" asp-route-id="@slider.Id" class="btn btn-warning">Edit</a>
                                 <a class="btn btn-danger">Delete</a>
 
                             </td>
@@ -52,7 +55,60 @@
 
                 </tbody>
             </table>
+
+
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item @(Model.HasPrev ? "" : "disabled")">
+                        <a class="page-link" asp-route-page="@(Model.PageIndex-1)">Previous</a>
+                    </li>
+
+                    @if (Model.TotalPages <= 5)
+                    {
+                        for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.PageIndex ? "active" : "")"><a class="page-link" asp-route-search="@ViewBag.Search" asp-route-page="@i">@i</a></li>
+                        }
+                    }
+                    else
+                    {
+                        int startPage = 1;
+                        int endPage = 5;
+                        if (Model.PageIndex > 3 && Model.PageIndex < Model.TotalPages - 2)
+                        {
+                            startPage = Model.PageIndex - 2;
+                            endPage = Model.PageIndex + 2;
+                        }
+                        else if (Model.PageIndex >= Model.TotalPages - 2)
+                        {
+                            startPage = Model.TotalPages - 4;
+                            endPage = Model.TotalPages;
+                        }
+
+                        if (startPage > 1)
+                        {
+                            <li class="page-item disabled"><a class="page-link">...</a></li>
+                        }
+
+                        for (int i = startPage; i <= endPage; i++)
+                        {
+                            <li class="page-item @(i == Model.PageIndex ? "active" : "")"><a class="page-link" asp-route-search="@ViewBag.Search" asp-route-page="@i">@i</a></li>
+                        }
+
+                        if (endPage < Model.TotalPages)
+                        {
+                            <li class="page-item disabled"><a class="page-link">...</a></li>
+                        }
+                    }
+
+                    <li class="page-item @(Model.HasNext ? "" : "disabled")">
+                        <a class="page-link" asp-route-page="@(Model.PageIndex+1)">Next</a>
+                    </li>
+                </ul>
+            </nav>
+
         </div>
     </div>
 </div>
+
 

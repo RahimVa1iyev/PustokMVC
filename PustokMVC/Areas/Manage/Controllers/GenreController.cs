@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PustokMVC.Areas.Manage.ViewModels;
 using PustokMVC.DAL;
@@ -6,7 +7,7 @@ using PustokMVC.Models;
 
 namespace PustokMVC.Areas.Manage.Controllers
 {
-    [Area("Manage")]
+    [Area("manage")]
     public class GenreController : Controller
     {
         private readonly PustokDbContext _context;
@@ -15,81 +16,73 @@ namespace PustokMVC.Areas.Manage.Controllers
         {
             _context = context;
         }
-
-        public IActionResult Index(int page=1,string search = null)
+        public IActionResult Index(int page=1)
         {
-            ViewBag.Search = search;
-            var query = _context.Genres.Include(x=>x.Books).AsQueryable();
-
-            if (search !=null)
-            {
-               query= query.Where(x => x.Name.Contains(search));
-            }
-            return View(PaginatedList<Genre>.Create(query,page,2));
-
+            var query = _context.Genres.Include(x => x.Books);
+           
+            return View(PaginatedList<Genre>.Create(query,page,3));
         }
+
         public IActionResult Create()
         {
-
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Genre genre)
         {
-            if(!ModelState.IsValid)
-                return View();
-            if (_context.Genres.Any(x=>x.Name==genre.Name))
+
+            if (!ModelState.IsValid) return View();
+
+            if (_context.Genres.Any(x => x.Name == genre.Name))           
             {
-                ModelState.AddModelError("Name", "Name has already been ");
+                ModelState.AddModelError("Name","Name has already beenn");
 
                 return View();
             }
+
+           
+
             _context.Genres.Add(genre);
 
             _context.SaveChanges();
 
-            return RedirectToAction("index","genre");
+            return RedirectToAction("Index");
         }
+
 
         public IActionResult Edit(int id)
         {
-            if (!_context.Genres.Any(x=>x.Id==id))
-            {
-                ModelState.AddModelError("Id", "Genre not found");
-                return View();
-            }
+            var genre = _context.Genres.FirstOrDefault(x => x.Id == id);
+            if (genre==null) return View("Error");
 
-            Genre existGenre = _context.Genres.FirstOrDefault(x=>x.Id==id);
 
-            return View(existGenre);
+         
+            return View(genre);
         }
 
         [HttpPost]
         public IActionResult Edit(Genre genre)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) return View();
+
+            var existGenre = _context.Genres.FirstOrDefault(x => x.Id == genre.Id);
+
+            if (existGenre == null) return View("Error");
+
+            if (existGenre.Name != genre.Name && _context.Genres.Any(x=>x.Name==genre.Name))
             {
+                ModelState.AddModelError("Name", "Name has already been token");
                 return View();
             }
-           
-
-            if (_context.Genres.Any(x => x.Name == genre.Name))
-            {
-                ModelState.AddModelError("Name", "Name has already been");
-
-                return View();
-
-            }
-
-            Genre existGenre = _context.Genres.FirstOrDefault(x => x.Id == genre.Id);
 
             existGenre.Name = genre.Name;
 
             _context.SaveChanges();
 
-
             return RedirectToAction("index");
         }
     }
+
+
 }

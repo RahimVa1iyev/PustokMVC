@@ -6,7 +6,7 @@ using PustokMVC.Models;
 
 namespace PustokMVC.Areas.Manage.Controllers
 {
-    [Area("Manage")]
+    [Area("manage")]
     public class AuthorController : Controller
     {
         private readonly PustokDbContext _context;
@@ -15,41 +15,37 @@ namespace PustokMVC.Areas.Manage.Controllers
         {
             _context = context;
         }
-        public IActionResult Index(int page=1, string search =null)
+
+        public IActionResult Index(int page = 1)
         {
+            var query = _context.Authors.Include(x=>x.Books);
+          
 
-
-            var query = _context.Authors.Include(x=>x.Books).AsQueryable();
-
-            if(search!=null) query = query.Where(x=>x.FullName.Contains(search));
-           
-
-            return View(PaginatedList<Author>.Create(query,page,2));
+            return View(PaginatedList<Author>.Create(query,page,3));
         }
 
         public IActionResult Create()
         {
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Author author)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+            if (!ModelState.IsValid) return View();
+
             _context.Authors.Add(author);
             _context.SaveChanges();
+          
             return RedirectToAction("index");
         }
 
         public IActionResult Edit(int id)
         {
+            Author author = _context.Authors.FirstOrDefault(x=>x.Id==id);
 
-            Author author = _context.Authors.Find(id);
-
-            if (author == null) return View("error");
+            if (author==null) return View("Error");
 
             return View(author);
 
@@ -58,21 +54,18 @@ namespace PustokMVC.Areas.Manage.Controllers
         [HttpPost]
         public IActionResult Edit(Author author)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+            if (!ModelState.IsValid) return View();
 
-            var existAuthor = _context.Authors.Find(author.Id);
+           var existAuthor = _context.Authors.FirstOrDefault(x=>x.Id==author.Id);
+            if (existAuthor==null) return View("Error");
 
-            if (existAuthor == null) return View("error");
-
-            existAuthor.FullName=author.FullName;
+            existAuthor.FullName = author.FullName;
 
             _context.SaveChanges();
-
+          
             return RedirectToAction("index");
-
         }
+
+
     }
 }
