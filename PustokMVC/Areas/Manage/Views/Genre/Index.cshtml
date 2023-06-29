@@ -5,7 +5,7 @@
 
 @{
     ViewData["Title"] = "Index";
-    var dataOrder = (Model.PageIndex-1)*Model.TotalPages;
+    var dataOrder = (Model.PageIndex-1)*3;
 }
 
 
@@ -40,7 +40,7 @@
                             <td>@genre.Books.Count</td>
                             <td>
                                 <a asp-action="edit" asp-route-id="@genre.Id" class="btn btn-warning">Edit</a>
-                                <a class="btn btn-danger">Delete</a>
+                                <a asp-action="delete" asp-route-id="@genre.Id" class="btn btn-danger  delete-b">Delete</a>
 
                             </td>
                         </tr>

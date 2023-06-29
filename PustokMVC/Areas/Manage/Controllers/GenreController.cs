@@ -82,6 +82,19 @@ namespace PustokMVC.Areas.Manage.Controllers
 
             return RedirectToAction("index");
         }
+
+        public IActionResult Delete(int id)
+        {
+            Genre existGenre = _context.Genres.FirstOrDefault(x => x.Id == id);
+
+            if (existGenre == null) return View("Error");
+
+            _context.Genres.Remove(existGenre);
+
+            _context.SaveChanges();
+
+            return RedirectToAction("index");
+        }
     }
 
 

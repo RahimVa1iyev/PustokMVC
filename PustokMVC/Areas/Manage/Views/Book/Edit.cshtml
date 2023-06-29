@@ -1,0 +1,120 @@
+﻿@using PustokMVC.Models
+@model Book
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1> Book Edit>
+        </div>
+        <div class="col-md-8">
+            <form method="post" asp-action="edit" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" class="form-control">
+                    <span asp-validation-for="Name"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="GenreId">Genre</label>
+                    <select class="form-control" asp-for="GenreId" asp-items="new SelectList(ViewBag.Genres,nameof(Genre.Id),nameof(Genre.Name))">
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="AuthorId">Author</label>
+                    <select class="form-control" asp-for="AuthorId" asp-items="new SelectList(ViewBag.Authors,nameof(Author.Id),nameof(Author.FullName))">
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label asp-for="TagIds">Tags</label>
+                    <select class="form-control" asp-for="TagIds" asp-items="new SelectList(ViewBag.Tags,nameof(Tag.Id),nameof(Tag.Name))">
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SalePrice">SalePrice</label>
+                    <input asp-for="SalePrice" class="form-control">
+                    <span asp-validation-for="SalePrice"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SalePrice">SalePrice</label>
+                    <input asp-for="SalePrice" class="form-control">
+                    <span asp-validation-for="SalePrice"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CostPrice">CostPrice</label>
+                    <input asp-for="CostPrice" class="form-control">
+                    <span asp-validation-for="CostPrice"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DiscountPercent">DiscountPercent</label>
+                    <input asp-for="DiscountPercent" class="form-control">
+                    <span asp-validation-for="DiscountPercent"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description">Description</label>
+                    <input asp-for="Description" class="form-control">
+                    <span asp-validation-for="Description"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IsNew">IsNew</label>
+                    <input asp-for="IsNew" class="form-control">
+                    <span asp-validation-for="IsNew"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IsFetured">IsFetured</label>
+                    <input asp-for="IsFetured" class="form-control">
+                    <span asp-validation-for="IsFetured"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StockStatus">StockStatus</label>
+                    <input asp-for="StockStatus" class="form-control">
+                    <span asp-validation-for="StockStatus"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PosterFile">PosterFile</label>
+                    <input asp-for="PosterFile" class="form-control">
+                    <img width="150" src="~/manage/uploads/books/@Model.Images.FirstOrDefault(x=>x.ImageStatus==true)?.ImageName" />
+                    <span asp-validation-for="PosterFile"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HoverFile">HoverFile</label>
+                    <input asp-for="HoverFile" class="form-control">
+                    <img width="150" src="~/manage/uploads/books/@Model.Images.FirstOrDefault(x=>x.ImageStatus==false)?.ImageName" />
+
+                    <span asp-validation-for="HoverFile"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AllFiles">AllFiles</label>
+                    <input asp-for="AllFiles" class="form-control">
+                    <div class="row">
+                        @foreach (var bookImage in Model.Images.Where(x => x.ImageStatus == null))
+                        {
+                            <div class="col-md-6">
+                                <div class="img-box">
+                                    <spam class="kross" onclick="$(this).parents()[1].remove()" >X</spam>
+                                    <img width="150" src="~/manage/uploads/books/@bookImage.ImageName" />
+                                    <input type="hidden" name="ImageIds" value="@bookImage.Id"  >
+
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                    <span asp-validation-for="AllFiles"></span>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+

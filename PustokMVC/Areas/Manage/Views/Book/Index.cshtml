@@ -1,11 +1,11 @@
 ﻿@using PustokMVC.Areas.Manage.ViewModels
 @using PustokMVC.Models
 
-@model PaginatedList<Author>
+@model PaginatedList<Book>
 
 @{
     ViewData["Title"] = "Index";
-    var dataOrder = (Model.PageIndex - 1) * 3;
+    var dataOrder = (Model.PageIndex - 1) * 4;
 }
 
 
@@ -13,33 +13,48 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="d-flex align-items-center justify-content-between">
-                <h1>Authors</h1>
+                <h1>Books</h1>
                 <a asp-action="create" class="btn btn-success">Create</a>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">FullName</th>
-                        <th scope="col">BookCount</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">SalePrice</th>
+                        <th scope="col">CostPrice</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">İmage</th>
+
+
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var author in Model.Items)
+                    @foreach (var book in Model.Items)
                     {
                         dataOrder++;
 
                         <tr>
                             <th scope="row">@dataOrder</th>
-                            <td>@author.FullName</td>
-                            <td>@author.Books.Count</td>
+                            <td>@book.Name</td>
+                            <td>@book.Genre.Name</td>
+                            <td>@book.Author.FullName</td>
+                            <td>@book.SalePrice</td>
+                            <td>@book.CostPrice</td>
+                            <td>@book.DiscountPercent</td>
                             <td>
-                                <a asp-action="edit" asp-route-id="@author.Id" class="btn btn-warning">Edit</a>
+                                <img width="120" src="~/manage/uploads/books/@book.Images.FirstOrDefault()?.ImageName" />
+                            </td>
+
+
+                            <td>
+                                <a asp-action="edit" asp-route-id="@book.Id" class="btn btn-warning">Edit</a>
                                 <a class="btn btn-danger">Delete</a>
 
                             </td>

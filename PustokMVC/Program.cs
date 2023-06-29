@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PustokMVC.DAL;
+using PustokMVC.Models;
 using PustokMVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,12 @@ builder.Services.AddDbContext<PustokDbContext>(opt =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<LayoutService>();
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
+{
+    opt.Password.RequiredLength = 8;
+
+}).AddDefaultTokenProviders().AddEntityFrameworkStores<PustokDbContext>();
 
 builder.Services.AddHttpContextAccessor();
 

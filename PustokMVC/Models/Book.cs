@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PustokMVC.AttributeValidation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PustokMVC.Models
@@ -14,14 +15,12 @@ namespace PustokMVC.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        [Required]
         public bool StockStatus { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(8,2)")]
         public decimal SalePrice { get; set; }
 
-        [Required]
         [Column(TypeName = "decimal(8,2)")]
         public decimal CostPrice { get; set; }
         [Range(1,100)]
@@ -30,15 +29,34 @@ namespace PustokMVC.Models
         [StringLength(600)]
         public string Description { get; set; }
 
-        [Required]
         public bool IsNew { get; set; }
 
-        [Required]
         public bool IsFetured { get; set; }
 
-        public ICollection<Image> Images { get; set; }
+        [NotMapped]
+        [FileMaxLength(2097152)]
+        [AllowContentType("image/jpeg" , "image/png")]
+        public IFormFile PosterFile { get; set; }
 
-        public ICollection<BookTag> BookTags { get; set; }
+        [NotMapped]
+        [FileMaxLength(2097152)]
+        [AllowContentType("image/jpeg", "image/png")]
+
+        public IFormFile HoverFile { get; set; }
+
+        [NotMapped]
+        [AllowContentType("image/jpeg", "image/png")]
+
+        public List<IFormFile> AllFiles { get; set; } = new List<IFormFile>();
+        [NotMapped]
+        public List<int> TagIds { get; set; } = new List<int>();
+
+        [NotMapped]
+        public List<int> ImageIds { get; set; }
+
+        public List<Image> Images { get; set; } = new List<Image>();
+
+        public List<BookTag> BookTags { get; set; } = new List<BookTag>();
 
         public Author Author { get; set; }
 

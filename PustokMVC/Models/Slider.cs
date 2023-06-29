@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using PustokMVC.AttributeValidation;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PustokMVC.Models
 {
@@ -20,6 +21,7 @@ namespace PustokMVC.Models
         public string Image { get; set; }
 
         [NotMapped]
+        [FileMaxLength(2097152)]
 
         public IFormFile FileImage { get; set; }
     }

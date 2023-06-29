@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PustokMVC.Models;
 
 namespace PustokMVC.DAL
 {
-    public class PustokDbContext : DbContext
+    public class PustokDbContext : IdentityDbContext
     {
 
         public PustokDbContext(DbContextOptions<PustokDbContext> options) :base(options)
@@ -28,6 +29,9 @@ namespace PustokMVC.DAL
         public DbSet<Image> Images { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<AppUser> AppUsers { get; set; }
+
 
 
 
