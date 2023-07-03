@@ -58,6 +58,8 @@ namespace PustokMVC.Models
 
         public List<BookTag> BookTags { get; set; } = new List<BookTag>();
 
+        public List<BasketItem> BasketItems { get; set; }
+
         public Author Author { get; set; }
 
         public Genre Genre { get; set; }

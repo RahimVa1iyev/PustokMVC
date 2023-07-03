@@ -122,13 +122,13 @@ Home Slider Tab
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane  active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
-                   @Html.Partial("_BookTabContentPartial",Model.FeaturedBooks)
+                   @Html.Partial("_BookTabContentPartial",@Model.FeaturedBooks)
                 </div>
                 <div class="tab-pane" id="men" role="tabpanel" aria-labelledby="men-tab">
-                   @Html.Partial("_BookTabContentPartial",Model.NewBooks)
+                   @Html.Partial("_BookTabContentPartial",@Model.NewBooks)
                 </div>
                 <div class="tab-pane" id="woman" role="tabpanel" aria-labelledby="woman-tab">
-                    @Html.Partial("_BookTabContentPartial",Model.DiscountedBooks)
+                    @Html.Partial("_BookTabContentPartial",@Model.DiscountedBooks)
                 </div>
             </div>
         </div>

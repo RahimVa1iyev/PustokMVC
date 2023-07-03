@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PustokMVC.Areas.Manage.ViewModels;
 using PustokMVC.DAL;
@@ -7,6 +8,8 @@ using PustokMVC.Models;
 
 namespace PustokMVC.Areas.Manage.Controllers
 {
+    [Authorize("Admin,SuperAdmin")]
+
     [Area("manage")]
     public class BookController : Controller
     {
@@ -37,8 +40,6 @@ namespace PustokMVC.Areas.Manage.Controllers
         [HttpPost]
 
         public IActionResult Create(Book book)
-
-
         {
      
 
@@ -186,7 +187,7 @@ namespace PustokMVC.Areas.Manage.Controllers
 
             _context.SaveChanges();
 
-            
+
             FileManager.DeleteAll(_env.WebRootPath,"manage/uploads/books",removebleImages);
 
             return RedirectToAction("index");

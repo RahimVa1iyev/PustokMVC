@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using PustokMVC.Areas.Manage.ViewModels;
@@ -7,6 +8,8 @@ using PustokMVC.Models;
 
 namespace PustokMVC.Areas.Manage.Controllers
 {
+    [Authorize("Admin,SuperAdmin")]
+
     [Area("manage")]
     public class GenreController : Controller
     {

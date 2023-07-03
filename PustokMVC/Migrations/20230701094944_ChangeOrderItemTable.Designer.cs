@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PustokMVC.DAL;
 
@@ -11,9 +12,10 @@ using PustokMVC.DAL;
 namespace PustokMVC.Migrations
 {
     [DbContext(typeof(PustokDbContext))]
-    partial class PustokDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230701094944_ChangeOrderItemTable")]
+    partial class ChangeOrderItemTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -446,9 +448,6 @@ namespace PustokMVC.Migrations
                     b.Property<byte>("Status")
                         .HasColumnType("tinyint");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
@@ -463,9 +462,6 @@ namespace PustokMVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Count")
                         .HasColumnType("int");
 
                     b.Property<decimal>("DiscountPercent")

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PustokMVC.DAL;
 
@@ -11,9 +12,10 @@ using PustokMVC.DAL;
 namespace PustokMVC.Migrations
 {
     [DbContext(typeof(PustokDbContext))]
-    partial class PustokDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230629114054_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,35 +246,6 @@ namespace PustokMVC.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("PustokMVC.Models.BasketItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("BasketItems");
-                });
-
             modelBuilder.Entity("PustokMVC.Models.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -405,90 +378,6 @@ namespace PustokMVC.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("PustokMVC.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(85)
-                        .HasColumnType("nvarchar(85)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
-
-                    b.Property<string>("Note")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<byte>("Status")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("PustokMVC.Models.OrderItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("DiscountPercent")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("UnitCostPrice")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<decimal>("UnitSalePrice")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderItems");
-                });
-
             modelBuilder.Entity("PustokMVC.Models.Promotion", b =>
                 {
                     b.Property<int>("Id")
@@ -613,23 +502,6 @@ namespace PustokMVC.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PustokMVC.Models.BasketItem", b =>
-                {
-                    b.HasOne("PustokMVC.Models.AppUser", "AppUser")
-                        .WithMany("BasketItems")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("PustokMVC.Models.Book", "Book")
-                        .WithMany("BasketItems")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("Book");
-                });
-
             modelBuilder.Entity("PustokMVC.Models.Book", b =>
                 {
                     b.HasOne("PustokMVC.Models.Author", "Author")
@@ -679,25 +551,6 @@ namespace PustokMVC.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("PustokMVC.Models.OrderItem", b =>
-                {
-                    b.HasOne("PustokMVC.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PustokMVC.Models.Order", "Order")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("Order");
-                });
-
             modelBuilder.Entity("PustokMVC.Models.Author", b =>
                 {
                     b.Navigation("Books");
@@ -705,8 +558,6 @@ namespace PustokMVC.Migrations
 
             modelBuilder.Entity("PustokMVC.Models.Book", b =>
                 {
-                    b.Navigation("BasketItems");
-
                     b.Navigation("BookTags");
 
                     b.Navigation("Images");
@@ -717,19 +568,9 @@ namespace PustokMVC.Migrations
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("PustokMVC.Models.Order", b =>
-                {
-                    b.Navigation("OrderItems");
-                });
-
             modelBuilder.Entity("PustokMVC.Models.Tag", b =>
                 {
                     b.Navigation("BookTags");
-                });
-
-            modelBuilder.Entity("PustokMVC.Models.AppUser", b =>
-                {
-                    b.Navigation("BasketItems");
                 });
 #pragma warning restore 612, 618
         }
